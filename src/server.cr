@@ -7,7 +7,7 @@ Log = Logger.new(STDOUT)
 Log.level = Logger::DEBUG
 
 lookup = Lookup.new
-lookup.build_index
+lookup.build_index("data/excerpt.csv")
 
 before_all do |env|
 	env.response.content_type = "application/json"

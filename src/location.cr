@@ -1,4 +1,6 @@
-class Location
+require "json"
+
+struct Location
   include JSON::Serializable
 
   property alpha_2 : String
