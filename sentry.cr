@@ -2,8 +2,8 @@ require "sentry"
 
 sentry = Sentry::ProcessRunner.new(
     display_name: "IP Geolocation API",
-    build_command: "crystal build ./src/server.cr -o ./bin/server",
-    run_command: "./bin/server",
+    build_command: "crystal build ./src/ip_geolocation_api.cr -o ./bin/ip_geolocation_api",
+    run_command: "./bin/ip_geolocation_api",
     files: ["./src/*.cr"]
 )
 
