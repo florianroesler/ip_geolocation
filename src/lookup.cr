@@ -5,22 +5,20 @@ require "logger"
 class Lookup
 
   DEFAULT_INPUT_PATH = "data/IP2LOCATION-LITE-DB3.CSV"
-  @hash : Hash(Range(Int64, Int64), Location)
-  @keys : Array(Range(Int64, Int64))
-  delegate :size, to: @hash
+  @mapping = Hash(Range(Int64, Int64), UInt64).new
+  @keys = Array(Range(Int64, Int64)).new
+  @locations = Hash(UInt64, Location).new
 
-  def initialize
-    @hash = Hash(Range(Int64, Int64), Location).new
-    @keys = Array(Range(Int64, Int64)).new
-  end
+  delegate :size, to: @mapping
 
-  def find(value : Int64)
+  def find(value : Int64) : (Location | Nil)
     matched_range = @keys.bsearch do |range|
       value <= range.end
     end
 
     if matched_range && matched_range.includes?(value)
-      @hash[matched_range]
+      digest = @mapping[matched_range]
+      @locations[digest]
     end
   end
 
@@ -35,7 +33,9 @@ class Lookup
 
         parsed_csv.each do |row|
           location = Location.new(row[2], row[3], row[4], row[5])
-          @hash[row[0].to_i64..row[1].to_i64] = location
+          digest = location.hash
+          @locations[digest] = location
+          @mapping[row[0].to_i64..row[1].to_i64] = digest
         end
 
         indexed_records_count += slice.size
@@ -43,6 +43,6 @@ class Lookup
       end
     end
 
-    @keys = @hash.keys
+    @keys = @mapping.keys
   end
 end
