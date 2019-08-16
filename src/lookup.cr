@@ -6,9 +6,9 @@ require "logger"
 class Lookup
 
   DEFAULT_INPUT_PATH = "data/IP2LOCATION-LITE-DB3.zip"
-  @mapping = Hash(Range(Int64, Int64), UInt64).new
+  @mapping = Hash(Range(Int64, Int64), UInt32).new
   @keys = Array(Range(Int64, Int64)).new
-  @locations = Hash(UInt64, Location).new
+  @locations = Hash(UInt32, Location).new
 
   delegate :size, to: @mapping
 
@@ -39,7 +39,7 @@ class Lookup
 
       parsed_csv.each do |row|
         location = Location.new(row[2], row[3], row[4], row[5])
-        digest = location.hash
+        digest = location.hash.to_u32
         @locations[digest] = location
         @mapping[row[0].to_i64..row[1].to_i64] = digest
       end
