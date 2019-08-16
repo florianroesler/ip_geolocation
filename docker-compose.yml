@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dev:
+    container_name: ip_geolocation_api
+    build:
+      context: .
+      dockerfile: docker/build/Dockerfile
+    command: ./docker/script/start.sh
+    ports:
+      - 8080:3000
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
