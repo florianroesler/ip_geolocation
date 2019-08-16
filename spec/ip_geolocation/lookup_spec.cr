@@ -24,6 +24,10 @@ describe Lookup do
       found_location.not_nil!.city.should eq("Los Angeles")
 
       lookup.find(168230444).should eq(nil)
+
+      found_location = lookup.find(16781311)
+      found_location.should be_a(Location)
+      found_location.not_nil!.city.should eq("Guangzhou")
     end
   end
 end
