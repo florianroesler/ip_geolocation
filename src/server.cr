@@ -2,6 +2,7 @@ require "kemal"
 require "http/client"
 require "logger"
 require "../src/lookup"
+require "../src/ip_address"
 
 Log = Logger.new(STDOUT)
 Log.level = Logger::DEBUG
@@ -17,22 +18,20 @@ get "/" do
 	{ status: "Believe me I am still alive!" }.to_json
 end
 
-IPV4_REGEX = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
 
 get "/v1/locate" do |env|
 	query = env.params.query.fetch("q", "").strip
 
-	if IPV4_REGEX.match(query)
-		ip_as_int = query.split(".").reduce(Int64.new(0)) { |total, value| (total << 8 ) + value.to_i }
-		lookup.find(ip_as_int.to_i64).to_json
+	address = IPAddress.new(query)
+
+	address_as_int = address.to_i64
+	if address_as_int
+		lookup.find(address_as_int).to_json
 	else
-		int_value = query.to_i64?
-		if int_value
-			lookup.find(int_value).to_json
-		else
-			{ status: "Understood #{query} as #{int_value}" }.to_json
-		end
+		env.response.status_code = 422
+		{ error: "Seems like you did not provide a valid IPv4 address or a corresponding integer representation." }.to_json
 	end
+
 end
 
 Kemal.run

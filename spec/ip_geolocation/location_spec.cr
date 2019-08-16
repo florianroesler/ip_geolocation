@@ -19,4 +19,13 @@ describe Location do
       location.to_json.should eq("{\"alpha_2\":\"US\",\"country\":\"United States\",\"state\":\"California\",\"city\":\"Los Angeles\"}")
     end
   end
+
+  describe "#hash" do
+    it "returns same hash for equal objects" do
+      location = Location.new("US", "United States", "California", "Los Angeles")
+      same_location = Location.new("US", "United States", "California", "Los Angeles")
+
+      location.hash.should eq(same_location.hash)
+    end
+  end
 end
