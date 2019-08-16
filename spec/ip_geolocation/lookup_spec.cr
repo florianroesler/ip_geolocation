@@ -4,7 +4,7 @@ describe Lookup do
   describe "#build_index" do
     it "builds an index" do
       lookup = Lookup.new
-      lookup.build_index("data/excerpt.csv")
+      lookup.build_index("data/excerpt.zip")
       lookup.size.should eq(100)
     end
   end
@@ -12,7 +12,7 @@ describe Lookup do
   describe "#find" do
     it "returns a location for a fitting range" do
       lookup = Lookup.new
-      lookup.build_index("data/excerpt.csv")
+      lookup.build_index("data/excerpt.zip")
       lookup.find(-1).should eq(nil)
 
       found_location = lookup.find(0)
