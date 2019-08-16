@@ -8,7 +8,7 @@ Log = Logger.new(STDOUT)
 Log.level = Logger::DEBUG
 
 lookup = Lookup.new
-lookup.build_index#("data/excerpt.csv")
+lookup.build_index
 
 before_all do |env|
 	env.response.content_type = "application/json"
@@ -24,7 +24,7 @@ get "/v1/locate" do |env|
 
 	address = IPAddress.new(query)
 
-	address_as_int = address.to_i64
+	address_as_int = address.to_u32
 	if address_as_int
 		lookup.find(address_as_int).to_json
 	else

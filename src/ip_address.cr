@@ -6,11 +6,11 @@ struct IPAddress
   def initialize(@address : String)
   end
 
-  def to_i64
+  def to_u32
     if IPV4_REGEX.match(address)
-      address.split(".").reduce(Int64.new(0)) { |total, value| (total << 8 ) + value.to_i }
+      address.split(".").reduce(UInt32.new(0)) { |total, value| (total << 8 ) + value.to_i }
     else
-      address.to_i64?
+      address.to_u32?
     end
   end
 end

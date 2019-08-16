@@ -13,7 +13,6 @@ describe Lookup do
     it "returns a location for a fitting range" do
       lookup = Lookup.new
       lookup.build_index("data/excerpt.zip")
-      lookup.find(-1).should eq(nil)
 
       found_location = lookup.find(0)
       found_location.should be_a(Location)
