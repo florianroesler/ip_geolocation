@@ -1,7 +1,7 @@
 require "csv"
 require "zip"
-require "./location"
 require "logger"
+require "./location"
 
 class Lookup
 

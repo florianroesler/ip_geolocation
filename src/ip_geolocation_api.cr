@@ -1,8 +1,8 @@
 require "kemal"
 require "http/client"
 require "logger"
-require "../src/lookup"
-require "../src/ip_address"
+require "./lookup"
+require "./ip_address"
 
 Log = Logger.new(STDOUT)
 Log.level = Logger::DEBUG
@@ -17,7 +17,6 @@ end
 get "/" do
 	{ status: "Believe me I am still alive!" }.to_json
 end
-
 
 get "/v1/locate" do |env|
 	query = env.params.query.fetch("q", "").strip

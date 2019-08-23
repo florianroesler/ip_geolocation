@@ -12,11 +12,11 @@ end
 puts result
 
 result = Benchmark.memory do
-  locations = Hash(UUInt32, Location).new
+  locations = Hash(UInt32, Location).new
   10.times do |i|
     1000.times do
       l = Location.new("US#{i}", "United States", "California", "Los Angeles")
-      locations[l.hash] = l
+      locations[l.hash.to_u32] = l
     end
   end
 end
