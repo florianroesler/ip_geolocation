@@ -1,21 +1,11 @@
 name: ip_geolocation_api
 version: 0.1.0
+authors:
+  - Florian Rösler <florian.roesler@gmail.com>
 
-# authors:
-#   - name <email@example.com>
+description: |
+  Self-sufficient shard for geolocating IPs. Based on the free IP2Location Lite database.
 
-# description: |
-#   Short description of logo_api
+crystal: 0.34.0
 
-dependencies:
-  kemal:
-    github: kemalcr/kemal
-  sentry:
-    github: samueleaton/sentry
-    branch: master
-
-# development_dependencies:
-#   webmock:
-#     github: manastech/webmock.cr
-
-# license: MIT
+license: MIT

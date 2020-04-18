@@ -1,9 +1,9 @@
 require "../spec_helper"
 
-describe Location do
+describe IPGeolocation::Location do
   describe "#initialize" do
     it "creates a location with properties" do
-      location = Location.new("US", "United States", "California", "Los Angeles")
+      location = IPGeolocation::Location.new("US", "United States", "California", "Los Angeles")
 
       location.alpha_2.should eq("US")
       location.country.should eq("United States")
@@ -14,7 +14,7 @@ describe Location do
 
   describe "#to_json" do
     it "creates a location with properties" do
-      location = Location.new("US", "United States", "California", "Los Angeles")
+      location = IPGeolocation::Location.new("US", "United States", "California", "Los Angeles")
 
       location.to_json.should eq("{\"alpha_2\":\"US\",\"country\":\"United States\",\"state\":\"California\",\"city\":\"Los Angeles\"}")
     end
@@ -22,8 +22,8 @@ describe Location do
 
   describe "#hash" do
     it "returns same hash for equal objects" do
-      location = Location.new("US", "United States", "California", "Los Angeles")
-      same_location = Location.new("US", "United States", "California", "Los Angeles")
+      location = IPGeolocation::Location.new("US", "United States", "California", "Los Angeles")
+      same_location = IPGeolocation::Location.new("US", "United States", "California", "Los Angeles")
 
       location.hash.should eq(same_location.hash)
     end
