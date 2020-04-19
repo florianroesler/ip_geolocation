@@ -1,4 +1,4 @@
-name: ip_geolocation_api
+name: ip_geolocation
 version: 0.1.0
 authors:
   - Florian Rösler <florian.roesler@gmail.com>
