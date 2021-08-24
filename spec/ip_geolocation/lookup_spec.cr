@@ -5,7 +5,7 @@ describe IPGeolocation::Lookup do
     it "builds an index" do
       lookup = IPGeolocation::Lookup.new
       lookup.build_index("spec/fixtures/excerpt.zip")
-      lookup.size.should eq(100)
+      lookup.size.should eq(30)
     end
   end
 

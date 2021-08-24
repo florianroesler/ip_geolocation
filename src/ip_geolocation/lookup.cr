@@ -1,5 +1,5 @@
 require "csv"
-require "zip"
+require "compress/zip"
 
 module IPGeolocation
   class Lookup
@@ -24,7 +24,7 @@ module IPGeolocation
     def build_index(file_path = DEFAULT_INPUT_PATH)
       Log.info { "Building Geolocation Index" }
 
-      Zip::File.open(file_path) do |zip_file|
+      Compress::Zip::File.open(file_path) do |zip_file|
         zip_file
           .entries
           .find { |entry| entry.filename.downcase.ends_with?(".csv") }

@@ -1,11 +1,11 @@
 name: ip_geolocation
-version: 0.1.0
+version: 1.0.0
 authors:
   - Florian Rösler <florian.roesler@gmail.com>
 
 description: |
   Self-sufficient shard for geolocating IPs. Based on the free IP2Location Lite database.
 
-crystal: 0.34.0
+crystal: ">= 1.0"
 
 license: MIT
